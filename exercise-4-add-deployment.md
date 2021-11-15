@@ -21,3 +21,4 @@ Cet exercice a pour objectifs :
 ## Pour aller plus loin : 
 
 * un exemple complet d'un pipeline pour une app avec Flask, Docker et un cluster Kubernetes dans le cloud AWS : https://aws.plainenglish.io/ci-cd-with-gitlab-kubernetes-eks-and-helm-a3667b0fb8ed 
+
