@@ -57,3 +57,53 @@ CI_REGISTRY_PASSWORD
 et la valeur du mot de passe de votre compte sur docker hub
 
 * Vous pouvez maintenant lancer un pipeline cela devrait fonctionner et l'image se déployer sur le hub docker
+
+## Ajout des test et de l'analyse qualité
+
+* Ajouter à votre pipeline :
+```yaml
+pytest:
+  stage: test
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install pytest pytest-cov
+    - pytest tests --cov --cov-report term --cov-report html
+  artifacts:
+    paths:
+      - htmlcov
+
+flake8:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install flake8
+    - flake8 --max-line-length=120 web/*.py
+
+mypy:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install mypy
+    - python3 -m mypy web/*.py
+
+pylint:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  allow_failure: true
+  script:
+    - pip3 install pylint
+    - pylint -d C0301 web/*.py
+
+pages:
+  stage: publish
+  script:
+    - mkdir .public
+    - cp -r htmlcov/* .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+```
+* N'oubliez pas de rajouter les stage correspondants au début du fichier
+* L'image $LATEST_IMAGE correspond à la vairable définit juste avant pour le build et le push de l'image docker
+
