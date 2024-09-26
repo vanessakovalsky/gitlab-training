@@ -15,7 +15,7 @@ Cet exercice a pour objectifs :
 
 ## Etendre le pipeline
 * En vous inspriant de ce qui est présenté ici, rajouter les étapes nécessaires au pipelines pour builder et pousser une image docker sur le hub docker : https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/05_add-further-steps.html 
-* Ajotuer une etape pour vérifier le respect des bonnes pratiques de développement sur le code python avec Pylint, myPy et Flake8 et l'execution des tests unitaires de manières séparée : https://www.patricksoftwareblog.com/setting-up-gitlab-ci-for-a-python-application/
+* Ajouter une étape pour vérifier le respect des bonnes pratiques de développement sur le code python avec Pylint, myPy et Flake8 et l'execution des tests unitaires de manières séparée : https://www.patricksoftwareblog.com/setting-up-gitlab-ci-for-a-python-application/
 * Déployer dans un cluster Kubernetes avec un Chart Helm : https://www.padok.fr/en/blog/kubernetes-gitlab-pipeline 
 
 ## Pour aller plus loin : 
