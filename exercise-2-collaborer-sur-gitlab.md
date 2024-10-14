@@ -12,15 +12,15 @@ Cet exercice a pour objectifs :
 
 * A partir du  dépôt git en local sur votre poste de l'exercice 1, vous aller modifier le fichier readme et le compléter en markdown (une explication détaillée de la syntaxe est disponible en français ici : https://wprock.fr/blog/markdown-syntaxe/ ) 
 avec les éléments suivants : 
-* * Dans un premier bloc : 
-* * * * vos attentes par rapport à la formation : quels sont les sujets qui vous intéressent en détail (nom du sujet + pourquoi ce sujet vous intéresse)
-* * * * vos objectifs : pourquoi suivez vous cette formation 
-* * Dans un second bloc : 
-* * * Les actions sous forme de todolist avec des cases à cocher, que vous avez ou aller faire pour atteindre vos objectifs 
-* * * Les ressources qui vous aident dans votre parcours d'apprentissage (liiste de liens, livres, documents, vidéos ...)
-* * Dans un troisième bloc : 
-* * * vos commentaires et notes personnelles
-* * * les commentaires des autres
+  * Dans un premier bloc : 
+    * vos attentes par rapport à la formation : quels sont les sujets qui vous intéressent en détail (nom du sujet + pourquoi ce sujet vous intéresse)
+    * vos objectifs : pourquoi suivez vous cette formation 
+  * Dans un second bloc : 
+    * Les actions sous forme de todolist avec des cases à cocher, que vous avez ou aller faire pour atteindre vos objectifs 
+    * Les ressources qui vous aident dans votre parcours d'apprentissage (liiste de liens, livres, documents, vidéos ...)
+  * Dans un troisième bloc : 
+    * vos commentaires et notes personnelles
+    * les commentaires des autres
 
 * Pour chaque bloc au moins un commit reprenant la description du bloc doit être insérer dans l'historique de Git
 * Pousser le dépôt sur un dépôt public Github
