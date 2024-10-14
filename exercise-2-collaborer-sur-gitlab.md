@@ -23,7 +23,7 @@ avec les éléments suivants :
     * les commentaires des autres
 
 * Pour chaque bloc au moins un commit reprenant la description du bloc doit être insérer dans l'historique de Git
-* Pousser le dépôt sur un dépôt public Github
+* Pousser le dépôt sur un dépôt public Gitlab
 
 ### Travail en équipe :
 
