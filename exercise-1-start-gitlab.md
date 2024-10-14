@@ -7,7 +7,7 @@ Cet exercice a pour objectifs :
 * de découvrir l'utilisation de Git
 
 ## Pré-requis : 
-* Avoir une clé SSH sur sa machine
+* Avoir une clé SSH sur sa machine : https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair
 * Avoir installé l'utilitaire git sur sa machine : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git 
 
 ## Créer un compte et un dépôt sur Gitlab
