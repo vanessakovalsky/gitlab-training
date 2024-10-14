@@ -14,7 +14,7 @@ Cet exercice a pour objectifs :
 
 * Aller sur gitlab.com 
 * Se créer un compte (vous pouvez utiliser un compte que vous posséder déjà ailleurs comme un compte google ou github par exemple)
-* Aller dans les paramètres de son compte, puis ajouter une clé publique SSH, elle sera utile pour travailler sur les différents projets de notre compte : https://docs.gitlab.com/ee/ssh/ 
+* Aller dans les paramètres de son compte, puis ajouter une clé publique SSH, elle sera utile pour travailler sur les différents projets de notre compte : [https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
 * Créer un projet sur son compte Gitlab : https://docs.gitlab.com/ee/user/project/working_with_projects.html#create-a-project 
 
 ## Récupération du projet en local et travail avec les commandes Git
