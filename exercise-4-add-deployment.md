@@ -12,9 +12,40 @@ Cet exercice a pour objectifs :
 * Que fait le pipeline proposé ?
 
 
-## Etendre le pipeline
-* En vous inspriant de ce qui est présenté ici, rajouter les étapes nécessaires au pipelines pour builder et pousser une image docker sur le hub docker : https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/05_add-further-steps.html 
-* Ajouter une étape pour vérifier le respect des bonnes pratiques de développement sur le code python avec Pylint, myPy et Flake8 et l'execution des tests unitaires de manières séparée : https://www.patricksoftwareblog.com/setting-up-gitlab-ci-for-a-python-application/
+## Etendre le pipeline en utilisant docker 
+* En vous inspriant de ce qui est présenté ici  https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/05_add-further-steps.html,
+* rajouter les étapes nécessaires au pipelines pour builder et pousser une image docker sur le hub docker :
+
+## Ajouter des étapes aux pipelines
+* Ajouter des étape pour vérifier le respect des bonnes pratiques de développement sur le code python avec Pylint, myPy et Flake8 et l'execution des tests unitaires de manières séparée
+* Pour chacune de ces étapes, vous utiliserez l'image docker construite et stockée à l'étape précédente
+* Pour chacune des étapes vous trouverez ci-dessous les commandes à éxecuter
+* * Pour l'execution des tests avec pytest --> artefact à récupérer dans le dossier htmlcov (paths)
+  ```
+  pip3 install pytest pytest-cov
+  pytest tests --cov --cov-report term --cov-report html
+  ```
+* * Pour l'execution de l'analyse statique avec Flake8 
+  ```
+  pip3 install flake8
+  flake8 --max-line-length=120 web/*.py
+  ```
+* * Pour l'execution de l'analyse statique avec myPy 
+  ```
+  pip3 install mypy
+  python3 -m mypy web/*.py
+  ```
+* * Pour l'execution de l'analyse avec pylint 
+  ```
+  pip3 install pylint
+  pylint -d C0301 web/*.py
+  ```
+* * Puis nous ajoutons une étapes qui permet de publier les rapport avec les commandes suivantes, le contenu du dossier public est à extraire en artefacts
+  ```
+  mkdir .public
+  cp -r htmlcov/* .public
+  mv .public public
+  ```
 
 ## Pour aller plus loin : 
 
