@@ -4,10 +4,7 @@
 
 ## Build et push du docker file
 
-* Modifier la première ligne du Dockerfile et remplacer la par : 
-```
-FROM debian:latest
-```
+
 * Cela permet à votre application de builder (y-compris en local)
 
 * Remplacer le contenu du fichier .gitlab-ci.yml par le contenu suivant : 
