@@ -50,6 +50,7 @@ Cet exercice a pour objectifs :
 ## Pour aller plus loin : 
 
 * un exemple complet d'un pipeline pour une app avec Flask, Docker et un cluster Kubernetes dans le cloud AWS : https://aws.plainenglish.io/ci-cd-with-gitlab-kubernetes-eks-and-helm-a3667b0fb8ed
-  Déployer dans un cluster Kubernetes avec un Chart Helm : https://www.padok.fr/en/blog/kubernetes-gitlab-pipeline 
+* Déployer dans un cluster Kubernetes avec un Chart Helm : https://www.padok.fr/en/blog/kubernetes-gitlab-pipeline
+* Optimiser le temps de construction de son image en utilisant le cache de docker : https://aymdev.io/fr/blog/article/utilisation-de-cache-avec-gitlab-ci-en-docker-in-docker 
 
 
