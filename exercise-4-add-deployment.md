@@ -7,7 +7,7 @@ Cet exercice a pour objectifs :
 
 
 ## Mise en place du pipeline Python
-* Forker le projet qui est ici sur votre propre utilisateur de gitlab : https://gitlab.com/huseinzol05/cicd-flask/-/tree/master 
+* Forker le projet qui est ici sur votre propre utilisateur de gitlab : [https://gitlab.com/vanessakovalsky1/cicd-flask](https://gitlab.com/vanessakovalsky1/cicd-flask)
 * Executer un pipeline pour vérifier qu'il fonctionne.
 * Que fait le pipeline proposé ?
 
