@@ -22,22 +22,22 @@ Cet exercice a pour objectifs :
 * Pour chacune des étapes vous trouverez ci-dessous les commandes à éxecuter
 * * Pour l'execution des tests avec pytest --> artefact à récupérer dans le dossier htmlcov (paths)
   ```
-  pip3 install pytest pytest-cov
+  pip install pytest pytest-cov
   pytest tests --cov --cov-report term --cov-report html
   ```
 * * Pour l'execution de l'analyse statique avec Flake8 
   ```
-  pip3 install flake8
+  pip install flake8
   flake8 --max-line-length=120 web/*.py
   ```
 * * Pour l'execution de l'analyse statique avec myPy 
   ```
-  pip3 install mypy
+  pip install mypy
   python3 -m mypy web/*.py
   ```
 * * Pour l'execution de l'analyse avec pylint 
   ```
-  pip3 install pylint
+  pip install pylint
   pylint -d C0301 web/*.py
   ```
 * * Puis nous ajoutons une étapes qui permet de publier les rapport avec les commandes suivantes, le contenu du dossier public est à extraire en artefacts
