@@ -30,7 +30,11 @@ Cet exercice a pour objectifs :
 
 * Un site statique peut être déployer via un générateur de site ou du code html directement par un pipeline Gitlab.
 * Pour cela on choisit un générateur et on demande à gitlab-ci de générer nos pages.
-* Exemple ici avec Pelican un générateur en Python : https://gitlab.com/pages/pelican/-/tree/main
+* Exemple ici avec Pelican un générateur en Python : https://gitlab.com/pages/pelican
+* Forker le projet : Pour forker un projet sur Gitlab, afficher la page d'accueil du projet (pas la page du dépôt) et cliquer sur Fork ou "Créer une bifurcation"
+* Ensuite, récupérer l'URL de votre propre page dans le menu Déploiement > Pages
+* Si vous faite une modification du fichier dans content/posts le pipeline se déclenchera de nouveau et votre modification sera publiée sur la même url
+* Vous avez automatisé la publication d'un site statique à partir du Pipeline et du générateur de site
 
 ## Pour aller plus loin
 
