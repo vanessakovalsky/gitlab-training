@@ -8,7 +8,6 @@ Cet exercice a pour objectifs :
 
 ## Mise en place du pipeline Python
 * Forker le projet qui est ici sur votre propre utilisateur de gitlab : https://gitlab.com/huseinzol05/cicd-flask/-/tree/master 
-* Configurer le runner pour le faire pointer sur celui que vous avez installer à l'exercice 3
 * Executer un pipeline pour vérifier qu'il fonctionne.
 * Que fait le pipeline proposé ?
 
