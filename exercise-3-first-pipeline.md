@@ -30,4 +30,9 @@ Cet exercice a pour objectifs :
 
 * Un site statique peut être déployer via un générateur de site ou du code html directement par un pipeline Gitlab.
 * Pour cela on choisit un générateur et on demande à gitlab-ci de générer nos pages.
-* Exemple ici avec Pelican un générateur en Python : https://gitlab.com/pages/pelican/-/tree/main 
+* Exemple ici avec Pelican un générateur en Python : https://gitlab.com/pages/pelican/-/tree/main
+
+## Pour aller plus loin
+
+* En fonction de vos besoins / projets, choisir un exemple sur cette page : https://docs.gitlab.com/ee/ci/examples/
+* Mettre en oeuvre le pipeline correspondant
