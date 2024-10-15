@@ -19,13 +19,11 @@ variables:
   REGISTRY_USER: vanessakovalsky
   APPLICATION: demo-python-flask
   LATEST_IMAGE: $REGISTRY_USER/$APPLICATION:latest
-  RELEASE_IMAGE: $REGISTRY_USER/$APPLICATION:$CI_BUILD_REF_NAME
-  DOCKER_DRIVER: overlay
+
 
 before_script:
   - echo "Starting"
-  - export DOCKER_IMAGE=$RELEASE_IMAGE
-  - if [ "$CI_BUILD_REF_NAME" == "master" ]; then export DOCKER_IMAGE=$LATEST_IMAGE; fi
+  - export DOCKER_IMAGE=$LATEST_IMAGE
   - echo "Build docker image $DOCKER_IMAGE"
 
 compile:
@@ -63,7 +61,7 @@ pytest:
   stage: test
   image: $LATEST_IMAGE
   script:
-    - pip3 install pytest pytest-cov
+    - pip install pytest pytest-cov
     - pytest tests --cov --cov-report term --cov-report html
   artifacts:
     paths:
@@ -73,14 +71,14 @@ flake8:
   stage: staticAnalysis
   image: $LATEST_IMAGE
   script:
-    - pip3 install flake8
+    - pip install flake8
     - flake8 --max-line-length=120 web/*.py
 
 mypy:
   stage: staticAnalysis
   image: $LATEST_IMAGE
   script:
-    - pip3 install mypy
+    - pip install mypy
     - python3 -m mypy web/*.py
 
 pylint:
@@ -88,7 +86,7 @@ pylint:
   image: $LATEST_IMAGE
   allow_failure: true
   script:
-    - pip3 install pylint
+    - pip install pylint
     - pylint -d C0301 web/*.py
 
 pages:
