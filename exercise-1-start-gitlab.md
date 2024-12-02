@@ -18,6 +18,12 @@ Cet exercice a pour objectifs :
 * Aller dans les paramètres de son compte, puis ajouter une clé publique SSH, elle sera utile pour travailler sur les différents projets de notre compte : [https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
 * Créer un projet sur son compte Gitlab : https://docs.gitlab.com/ee/user/project/working_with_projects.html#create-a-project 
 
+## Authentifier son compte Github/Gitlab depuis un dépôt local :
+
+* Soit vous passez par la génération d'une clé ssh sur la machine sur laquelle vous travailler, puis dans votre compte sur le dépôt git distant il faut déposer la clé SSH publiqué, et ensuite vous pouvez cloner votre projet en SSH et vous pouvez travailler dessus 
+* Soit vous voulez rester en HTTPS (et donc travailler sans clé SSH) et dans ce cas là, il faut générer un jeton d'accès temporaire qui va remplacer votre mot de passe pour vous connecter et faire vos actions sur votre dépôt distant. Dans Github > Votre compte > Paramètres > Developper settings > Personnal access token ; Sur gitlab votre compte > Paramètre utilisateur > Access Token
+* Pensez également à définir dans votre projet local les paramètre user.username et user.email (/!\ email et pas user.mail) 
+
 ## Récupération du projet en local et travail avec les commandes Git
 
 * En local sur votre machine cloner le projet avec votre clé SSH (voir les instructions et commande sur la page de votre projet directement)
