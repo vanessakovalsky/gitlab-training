@@ -22,7 +22,7 @@ Cet exercice a pour objectifs :
       - test
 ```
 
-* Pour visualiser et lancer le pipeline, cliqquer dans le menu sur `CI/CD pipelines`
+* Pour visualiser et lancer le pipeline, cliquer dans le menu sur `CI/CD pipelines`
 * Cliquer sur le pipeline de votre projet pour voir le statut de votre pipeline.
 * Cliquer sur chaque étape et chercher quel runner a executer l'étape.
 
