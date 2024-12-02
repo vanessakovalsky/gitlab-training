@@ -40,7 +40,7 @@ avec les éléments suivants :
 
 * Créer un wiki pour votre projet : https://docs.gitlab.com/ee/user/project/wiki/#create-the-wiki-home-page
 * Celui-ci contiendra la documentation de votre projet, vous pouvez par exemple expliquer l'organisation de votre projet
-* Ajotuer une page de wiki via un nouveau fichier markdown qui contiendra la liste de vos séries ou de vos jeux vidéos préférés
+* Ajouter une page de wiki via un nouveau fichier markdown qui contiendra la liste de vos séries ou de vos jeux vidéos préférés
 
 
 ## Utilisation des outils de gestion de projets
