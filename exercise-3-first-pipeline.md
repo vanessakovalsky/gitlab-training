@@ -13,7 +13,7 @@ Cet exercice a pour objectifs :
 * Créer un fichier à la racine du projet avec le nom : .gitlab-ci.yml 
 * Sélectionner .gitlab-ci.yml pour le type de template et appliquer le template Bash. Cela va pré-remplir le fichier.
 * Pour créer un fichier minimal : 
-    * Supprimer toutes les lignes avant build 1 (donc les lignes 1 à 15)
+    * Supprimer toutes les lignes avant build 1
     * Supprimer toutes les lignes après `echo "For example run a test suite"` dans la section test1
 * Ajouter les étapes `build` et `test` en collant les lignes ci-dessous tout en haut du fichier. 
 ```yaml
