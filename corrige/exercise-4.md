@@ -100,7 +100,7 @@ pages:
       - public
 ```
 * N'oubliez pas de rajouter les stage correspondants au début du fichier
-* L'image $LATEST_IMAGE correspond à la vairable définit juste avant pour le build et le push de l'image docker
+* L'image $LATEST_IMAGE correspond à la variable définit juste avant pour le build et le push de l'image docker
 
 ## Corrigé complet
 
