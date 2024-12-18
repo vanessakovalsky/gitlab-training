@@ -1,4 +1,4 @@
-# Exercice  - Mise en place d'un premier pipeline 
+# Exercice  - Mise en place d'un premier runner 
 
 ## Objectifs
 
