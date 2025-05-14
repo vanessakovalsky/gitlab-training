@@ -41,6 +41,6 @@ Cet exercice a pour objectifs :
 * Afin de connaitre les commandes disponibles sur Git, voici un outil à installer sur votre machine
 https://github.com/jlord/git-it-electron/releases
 * Il manque une bibliothèque dans le package
-  * Sous linux, exécuter la commande : `sudo apt install libgconf-2-4`
+  * Sous linux, https://2h3ph3rd.medium.com/how-to-install-libgconf-2-4-on-ubuntu-23-10-fec6bda8d5f5
   * Sous windows : 
 * Une fois installé, exécuter le et suivre les différents exercices qui vous expliqueront les différentes commandes de git qui existe ainsi que leur contexte d'utilisation.
