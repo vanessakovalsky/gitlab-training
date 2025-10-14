@@ -3,7 +3,7 @@
 ## Objectifs
 Cet exercice a pour objectifs : 
 * de mettre en place un pipeline sur Python
-* d'enrichir ce pipeline en créant une image docker et en déployant notre application dans Kubernetes
+* d'enrichir ce pipeline en créant une image docker et en utilisant les outils de CI à notre disposition pour vérifier la qualité du code de notre application
 
 
 ## Mise en place du pipeline Python
@@ -13,8 +13,8 @@ Cet exercice a pour objectifs :
 
 
 ## Etendre le pipeline en utilisant docker 
-* En vous inspriant de ce qui est présenté ici  https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/05_add-further-steps.html,
-* rajouter les étapes nécessaires au pipelines pour builder et pousser une image docker sur le hub docker :
+* En vous inspriant de ce qui est présenté ici  [https://blog.stephane-robert.info/post/gitlab-container-docker-registry/](https://blog.stephane-robert.info/post/gitlab-container-docker-registry/)
+* rajouter les étapes nécessaires au pipelines pour builder et pousser une image docker sur le registre d'image Gitlab
 
 ## Ajouter des étapes aux pipelines
 * Ajouter des étape pour vérifier le respect des bonnes pratiques de développement sur le code python avec Pylint, myPy et Flake8 et l'execution des tests unitaires de manières séparée
