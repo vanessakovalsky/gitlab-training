@@ -24,15 +24,14 @@ La manière la plus commune de déclencher l'exécution d'un pipeline est de le 
 
 1. Dans le menu de gauche, cliquer sur **Repository > Files**.
 2. En haut à gauche de l'écran, changer pour la branche **new-feature** en la selectionnnant dans la liste déroulante qui affiche actuellement **main**.
-3. Dans la liste des fichiers du dépôts, cliquer sur le dossier `views` et sur le fichier `index.pug`.
-4. Cliquer sur **Edit** et modifier la dernière ligne du fichier. 
-*IMPORTANT: preserver l'indentation de 2 espace pour cette ligne et inclure le  `p` au début de la ligne.*
+3. Dans la liste des fichiers du dépôts, cliquer sur le fichier `server.js`.
+4. Cliquer sur **Edit** et modifier la ligne suivante du fichier (le message entre guillemet)
    
-   ```
-     p GitLab welcomes you to #{title}
-   ```
+```
+    message: "Hello World!",
+```
    
-5. Dans le champs **Commit message**, taper `Update welcome message in index.pug`
+5. Dans le champs **Commit message**, taper `Update welcome message in server.js`
 6. Laisser le champ **Target branch** définit sur `new-feature`. 
 7. Cliquer sur **Commit changes**.
 8. Cliquer sur **Create merge request**.
