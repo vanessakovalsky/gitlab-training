@@ -52,19 +52,6 @@ git tag v2.0.0
 git push --tags
 ```
 
-### Exercice 1.2 : Configuration du Personal Access Token
-
-1. Allez dans **Settings > Access Tokens**
-2. Créez un token avec les scopes suivants :
-   - `api`
-   - `read_repository`
-   - `write_repository`
-3. Sauvegardez le token
-4. Ajoutez-le comme variable CI/CD dans **Settings > CI/CD > Variables** :
-   - Nom : `GITLAB_TOKEN`
-   - Valeur : votre token
-   - Type : Masked
-
 ---
 
 ## Partie 2 : Nettoyage des branches obsolètes (45 min)
@@ -154,7 +141,7 @@ cleanup_branches:
           echo "Would delete: $branch"
         else
           curl --request DELETE \
-               --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+               --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
                "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/branches/${branch}"
           echo "Deleted: $branch"
         fi
@@ -187,7 +174,7 @@ cleanup_old_tags:
   script:
     - |
       # Récupérer tous les tags via l'API
-      tags=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      tags=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/tags" | jq -r '.[].name')
       
       # Compter les tags
@@ -203,7 +190,7 @@ cleanup_old_tags:
         for tag in $tags_to_delete; do
           echo "Deleting tag: $tag"
           curl --request DELETE \
-               --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+               --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
                "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/tags/${tag}"
         done
       else
@@ -251,7 +238,7 @@ cleanup_artifacts:
   script:
     - |
       # Récupérer les jobs avec artefacts de plus de 7 jours
-      jobs=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      jobs=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs?per_page=100")
       
       echo "$jobs" | jq -r '.[] | select(.artifacts_file != null) | "\(.id) \(.created_at)"' | \
@@ -264,7 +251,7 @@ cleanup_artifacts:
         if [ $age_days -gt 7 ]; then
           echo "Deleting artifacts from job $job_id (${age_days} days old)"
           curl --request DELETE \
-               --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+               --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
                "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/${job_id}/artifacts"
         fi
       done
@@ -289,7 +276,7 @@ clear_cache:
     - echo "Clearing all caches for this project"
     - |
       curl --request DELETE \
-           --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+           --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
            "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/runner_caches"
   cache: {}
   when: manual
@@ -312,22 +299,22 @@ storage_report:
       echo "=== Storage Usage Report ==="
       
       # Taille du dépôt
-      repo_size=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      repo_size=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}" | jq -r '.statistics.repository_size')
       echo "Repository size: $(($repo_size / 1024 / 1024)) MB"
       
       # Taille des artefacts
-      artifacts_size=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      artifacts_size=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}" | jq -r '.statistics.job_artifacts_size')
       echo "Artifacts size: $(($artifacts_size / 1024 / 1024)) MB"
       
       # Nombre de branches
-      branches_count=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      branches_count=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/branches" | jq '. | length')
       echo "Total branches: $branches_count"
       
       # Nombre de tags
-      tags_count=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      tags_count=$(curl --silent --header "PRIVATE-TOKEN: $CI_GITLAB_TOKEN" \
         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/repository/tags" | jq '. | length')
       echo "Total tags: $tags_count"
   artifacts:
