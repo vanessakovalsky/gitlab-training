@@ -15,7 +15,7 @@ Cet exercice a pour objectifs :
 6. Dans le menu de gauche, cliquer sur **CI/CD > Pipelines**. Noter que le pipeline n'a pas encore fonctionner.
 7. Dans le menu de gauche, cliquer sur **Repository > Branches**. Cliquer sur **New branch**.
 8. Dans le champ **Branch name**, entrer `new-feature` et cliquer sur **Create branch**.
-9. Dans le menu de gauche, cliquer sur **CI/CD > Pipelines**. Vuos verrez un pipeline avec le label **Auto DevOps**, qui est entrain de s'exécuter sur la branche que vous venez de créer.
+9. Dans le menu de gauche, cliquer sur **CI/CD > Pipelines**. Vous verrez un pipeline avec le label **Auto DevOps**, qui est entrain de s'exécuter sur la branche que vous venez de créer.
 10. Cliquer sur l'icone de status du  pipeline en cours d'exécution et noter les 6 étapes (representées par 6 colonnes dans le graphique de pipeline) que Auto DevOps a créé.
 
 ## Déclencher une exécution de pipeline en validant une modification
