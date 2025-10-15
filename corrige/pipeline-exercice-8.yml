@@ -36,8 +36,8 @@ buildDocker:
 
 # Pour l'execution des tests avec pytest --> artefact à récupérer dans le dossier htmlcov (paths)
 testUnitaire:
-#  tags:
-#    - testrunner
+  tags:
+    - testrunner
   stage: qa
   image: $NOM_IMAGE_DOCKER
   script:
@@ -106,6 +106,10 @@ container-scan:
   image: 
     name: aquasec/trivy:latest
     entrypoint: [""]
+  variables:
+    TRIVY_USERNAME: $CI_REGISTRY_USER
+    TRIVY_PASSWORD: $CI_REGISTRY_PASSWORD
+    TRIVY_AUTH_URL: $CI_REGISTRY
   script:
     - trivy image --format json --output trivy-report.json $NOM_IMAGE_DOCKER
     - trivy image --exit-code 0 --severity HIGH $NOM_IMAGE_DOCKER
