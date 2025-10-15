@@ -125,6 +125,11 @@ Analyser les vulnérabilités de votre image Docker.
      image: 
        name: aquasec/trivy:latest
        entrypoint: [""]
+     ## Pour les projets privé il faut donner les infos de connexions à Trivy
+     variables:
+       TRIVY_USERNAME: $CI_REGISTRY_USER
+       TRIVY_PASSWORD: $CI_REGISTRY_PASSWORD
+       TRIVY_AUTH_URL: $CI_REGISTRY
      script:
        - trivy image --format json --output trivy-report.json $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
        - trivy image --exit-code 0 --severity HIGH $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
