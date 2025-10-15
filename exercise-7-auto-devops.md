@@ -44,3 +44,9 @@ La manière la plus commune de déclencher l'exécution d'un pipeline est de le 
 
 12. L'étape **Review** du pipeline Auto DevOps  deploie votre application NodeJS Express dans un environnement dédié à la branche. Vous pouvez voir le status de chaque pipeline en survolant l'icone circulaire du status de pipeline. Une fois le  pipeline terminé l'étape **Review**, voir l'application déployée en cliquant sur **View latest app** au milieu de la requête de merge. Vous devriez alors voir le texte que vous avez modifié.
 13. Revenir à l'onglet de GitLab. Dans le menu de gauche, cliquer sur **Packages & Registries > Container Registry**. Vous devriez voir le conteneur Docker que le pipeline Auto DevOps a créé lorsqu'il a déployé l'application dans l'environnement.
+
+
+## Ressources supplémentaires
+
+* [Fichier gitlab-ci.yaml utilisé par AutoDevOps](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Auto-DevOps.gitlab-ci.yml)
+* [Personnaliser l'autodevops](https://docs.gitlab.com/topics/autodevops/customize/)
