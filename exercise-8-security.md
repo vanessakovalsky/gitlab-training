@@ -122,7 +122,9 @@ Analyser les vulnérabilités de votre image Docker.
    ```yaml
    container-scan:
      stage: security
-     image: aquasec/trivy:latest
+     image: 
+       name: aquasec/trivy:latest
+       entrypoint: [""]
      script:
        - trivy image --format json --output trivy-report.json $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
        - trivy image --exit-code 0 --severity HIGH $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
@@ -160,7 +162,9 @@ S'assurer qu'aucun secret n'est exposé dans le code.
    ```yaml
    secret-scan:
      stage: security
-     image: zricethezav/gitleaks:latest
+     image:
+       name: zricethezav/gitleaks:latest
+       entrypoint: [""]
      script:
        - gitleaks detect --source . --report-format json --report-path gitleaks-report.json --verbose
      artifacts:
