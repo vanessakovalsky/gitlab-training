@@ -12,8 +12,6 @@ Intégrer des analyses de sécurité essentielles dans votre pipeline GitLab CI/
 
 ## Durée estimée : 60 minutes
 
----
-
 ## Partie 0 : préparation du dépôt
 
 * Reprenez votre dépôt avec l'application Python.
@@ -54,6 +52,7 @@ Détecter les vulnérabilités dans vos dépendances Python avec Safety.
 <details>
   <summary>Solution</summary>
    **Code attendu :**
+   
    ```yaml
    dependency-check:
      stage: security
@@ -68,7 +67,6 @@ Détecter les vulnérabilités dans vos dépendances Python avec Safety.
      allow_failure: true
    ```
 </details>
----
 
 ## Partie 2 : Analyse statique du code avec Bandit (15 min)
 
@@ -84,22 +82,24 @@ Identifier les problèmes de sécurité dans votre code Python.
    - Sauvegarde le rapport en artifact
    - Autorise l'échec du job
 
-**Code attendu :**
-```yaml
-sast-scan:
-  stage: security
-  image: python:3.9
-  script:
-    - pip install bandit
-    - bandit -r . -f json -o bandit-report.json || true
-  artifacts:
-    paths:
-      - bandit-report.json
-    expire_in: 1 week
-  allow_failure: true
-```
-
----
+<details>
+  <summary>Solution</summary>
+   **Code attendu :**
+      
+   ```yaml
+   sast-scan:
+     stage: security
+     image: python:3.9
+     script:
+       - pip install bandit
+       - bandit -r . -f json -o bandit-report.json || true
+     artifacts:
+       paths:
+         - bandit-report.json
+       expire_in: 1 week
+     allow_failure: true
+   ```
+</details>
 
 ## Partie 3 : Scan de l'image Docker avec Trivy (20 min)
 
@@ -115,27 +115,29 @@ Analyser les vulnérabilités de votre image Docker.
    - Génère un rapport JSON
    - Bloque uniquement sur les vulnérabilités CRITICAL
 
-**Code attendu :**
-```yaml
-container-scan:
-  stage: security
-  image: aquasec/trivy:latest
-  script:
-    - trivy image --format json --output trivy-report.json $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-    - trivy image --exit-code 0 --severity HIGH $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-    - trivy image --exit-code 1 --severity CRITICAL $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  artifacts:
-    paths:
-      - trivy-report.json
-    expire_in: 1 week
-  dependencies:
-    - package
-  allow_failure: false
-```
+<details>
+  <summary>Solution</summary>
+   **Code attendu :**
+
+   ```yaml
+   container-scan:
+     stage: security
+     image: aquasec/trivy:latest
+     script:
+       - trivy image --format json --output trivy-report.json $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+       - trivy image --exit-code 0 --severity HIGH $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+       - trivy image --exit-code 1 --severity CRITICAL $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+     artifacts:
+       paths:
+         - trivy-report.json
+       expire_in: 1 week
+     dependencies:
+       - package
+     allow_failure: false
+   ```
+</details>
 
 **Note :** Ajustez le nom du job de build Docker selon votre configuration (ici `package`).
-
----
 
 ## Partie 4 : Détection de secrets avec Gitleaks (10 min)
 
@@ -150,55 +152,25 @@ S'assurer qu'aucun secret n'est exposé dans le code.
    - Génère un rapport JSON
    - Bloque le pipeline si des secrets sont détectés
 
-**Code attendu :**
-```yaml
-secret-scan:
-  stage: security
-  image: zricethezav/gitleaks:latest
-  script:
-    - gitleaks detect --source . --report-format json --report-path gitleaks-report.json --verbose
-  artifacts:
-    paths:
-      - gitleaks-report.json
-    expire_in: 1 week
-    when: always
-  allow_failure: false
-```
-
----
-
-## Pipeline complet attendu
-
-Voici la structure finale de votre `.gitlab-ci.yml` :
-
-```yaml
-stages:
-  - build
-  - test
-  - package
-  - security
-  - deploy
-
-# Vos jobs existants (build, test, package...)
-
-dependency-check:
-  stage: security
-  # ... (code de la partie 1)
-
-sast-scan:
-  stage: security
-  # ... (code de la partie 2)
-
-container-scan:
-  stage: security
-  # ... (code de la partie 3)
-
-secret-scan:
-  stage: security
-  # ... (code de la partie 4)
-```
-
----
+<details>
+  <summary>Solution</summary>
+   
+   **Code attendu :**
+   
+   ```yaml
+   secret-scan:
+     stage: security
+     image: zricethezav/gitleaks:latest
+     script:
+       - gitleaks detect --source . --report-format json --report-path gitleaks-report.json --verbose
+     artifacts:
+       paths:
+         - gitleaks-report.json
+       expire_in: 1 week
+       when: always
+     allow_failure: false
+   ```
+</details>
 
 ## Vérification et tests
 
@@ -227,7 +199,6 @@ secret-scan:
 - ✅ Un pipeline qui s'exécute avec succès
 - ✅ Des artifacts de rapports accessibles dans GitLab
 
----
 
 ## Critères de réussite
 
@@ -236,7 +207,6 @@ secret-scan:
 - 🎯 Le pipeline bloque sur les vulnérabilités CRITICAL et les secrets
 - 🎯 Le pipeline autorise les warnings sur les autres vulnérabilités
 
----
 
 ## Ressources rapides
 
@@ -245,6 +215,3 @@ secret-scan:
 - [Trivy](https://aquasecurity.github.io/trivy/) - Scan de conteneurs
 - [Gitleaks](https://github.com/gitleaks/gitleaks) - Détection de secrets
 
----
-
-**Temps total : 60 minutes** (15 + 15 + 20 + 10)
