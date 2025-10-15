@@ -1,4 +1,4 @@
-# Exercice 5 - Découverte de l'Auto DevOps de Gitlab
+# Exercice 7 - Découverte de l'Auto DevOps de Gitlab
 
 ## Objectifs
 Cet exercice a pour objectifs :
