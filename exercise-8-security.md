@@ -45,7 +45,7 @@ Détecter les vulnérabilités dans vos dépendances Python avec Safety.
 2. Créez un job `dependency-check` qui :
    - Utilise l'image `python:3.9`
    - Installe `safety` avec `pip install safety`
-   - Exécute `safety check --file requirements.txt --json --output safety-report.json`
+   - Exécute `safety check --file requirements.txt --output json > safety-report.json`
    - Sauvegarde le rapport en artifact
    - Autorise l'échec du job (`allow_failure: true`)
 
