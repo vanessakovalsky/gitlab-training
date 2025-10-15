@@ -1,4 +1,4 @@
-# Exercice 6 - Intégration de la sécurité dans le pipeline CI/CD
+# Exercice 8 - Intégration de la sécurité dans le pipeline CI/CD
 
 ## Objectifs
 
