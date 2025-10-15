@@ -1,0 +1,195 @@
+# On définit un input (/!\ le pipeline ne se lance plus en automatique sauf si je rajoute une valeur par défaut)
+#spec:
+#  inputs:
+#    nom_image:
+#---
+
+# Mettre un tag par défaut sur tous les jobs
+#default:
+#  tags:
+#    - toto
+
+stages:
+  - build
+  - qa
+  - security
+  - release
+  - deploy
+
+variables:
+  NOM_IMAGE_DOCKER: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+
+buildDocker:
+  stage: build
+  image: docker:latest
+  services: 
+    - docker:dind
+  script: 
+    - echo $NOM_IMAGE_DOCKER
+#    - echo $[[ inputs.nom_image ]]
+    - docker build -t $NOM_IMAGE_DOCKER .
+    - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker push $NOM_IMAGE_DOCKER
+  only:
+    changes:
+      - Dockerfile
+
+# Pour l'execution des tests avec pytest --> artefact à récupérer dans le dossier htmlcov (paths)
+testUnitaire:
+#  tags:
+#    - testrunner
+  stage: qa
+  image: $NOM_IMAGE_DOCKER
+  script:
+    - pip install pytest pytest-cov
+    - pytest tests --cov --cov-report term --cov-report html
+  artifacts:
+    paths:
+      - htmlcov
+
+
+# Pour l'execution de l'analyse statique avec Flake8
+flake8:
+  stage: qa
+  image: $NOM_IMAGE_DOCKER
+  script:  
+    - pip install flake8
+    - flake8 --max-line-length=120 web/*.py
+
+# Pour l'execution de l'analyse statique avec myPy
+myPy:
+  stage: qa
+  image: $NOM_IMAGE_DOCKER
+  script: 
+    - pip install mypy
+    - python3 -m mypy web/*.py
+
+# Pour l'execution de l'analyse avec pylint
+pylint:
+  stage: qa
+  image: $NOM_IMAGE_DOCKER
+  script: 
+    - pip install pylint
+    - pylint -d C0301 web/*.py
+  allow_failure: true
+
+# Puis nous ajoutons une étapes qui permet de publier les rapport avec les commandes suivantes, le contenu du dossier public est à extraire en artefacts
+
+
+dependency-check:
+  stage: security
+  image: $NOM_IMAGE_DOCKER
+  script:
+    - pip install --upgrade pip
+    - pip install safety
+    - safety check --file requirements.txt --output json > safety-report.json || true
+  artifacts:
+    paths:
+      - safety-report.json
+    expire_in: 1 week
+  allow_failure: true
+
+sast-scan:
+  stage: security
+  image: $NOM_IMAGE_DOCKER
+  script:
+    - pip install bandit
+    - bandit -r . -f json -o bandit-report.json || true
+  artifacts:
+    paths:
+      - bandit-report.json
+    expire_in: 1 week
+  allow_failure: true
+
+container-scan:
+  stage: security
+  image: 
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - trivy image --format json --output trivy-report.json $NOM_IMAGE_DOCKER
+    - trivy image --exit-code 0 --severity HIGH $NOM_IMAGE_DOCKER
+    - trivy image --exit-code 1 --severity CRITICAL $NOM_IMAGE_DOCKER
+  artifacts:
+    paths:
+      - trivy-report.json
+    expire_in: 1 week
+  dependencies:
+    - buildDocker
+  allow_failure: false
+
+secret-scan:
+  stage: security
+  image: 
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --report-format json --report-path gitleaks-report.json --verbose
+  artifacts:
+    paths:
+      - gitleaks-report.json
+    expire_in: 1 week
+    when: always
+  allow_failure: false
+
+
+pages:
+  stage: deploy
+  script:
+    - mkdir .public
+    - cp -r htmlcov/* .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+
+
+publish:
+  stage: release
+  script:
+    - apt update && apt install zip
+    - zip -r webapp.zip web
+    - ls -lh webapp.zip
+    - PACKAGE_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/my_package/${CI_COMMIT_TAG}/webapp.zip"
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+           --upload-file webapp.zip \
+           $PACKAGE_URL
+    - echo "PACKAGE_URL=${PACKAGE_URL}" >> package.env
+  artifacts:
+    reports:
+      dotenv: package.env
+  only:
+    - tags   
+
+create-release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: publish
+      artifacts: true
+  script:
+    - echo "Creating release with package ${PACKAGE_URL}"
+  release:
+    name: 'Release $CI_COMMIT_TAG'
+    description: 'Release created using the release-cli.'
+    tag_name: '$CI_COMMIT_TAG'
+    assets:
+      links:
+        - name: 'webapp.zip'
+          url: '${PACKAGE_URL}'
+          link_type: 'package'
+  only:
+    - tags
+
+
+deploy-dev:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Déploiement en développement"
+    - echo "Image déployé $NOM_IMAGE_DOCKER"
+  environment:
+    name: dev
+  only:
+    - develop
