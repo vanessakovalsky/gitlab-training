@@ -59,7 +59,7 @@ Détecter les vulnérabilités dans vos dépendances Python avec Safety.
      image: python:3.9
      script:
        - pip install safety
-       - safety check --file requirements.txt --json --output safety-report.json || true
+       - safety check --file requirements.txt --output json > safety-report.json || true
      artifacts:
        paths:
          - safety-report.json
