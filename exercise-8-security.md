@@ -51,21 +51,23 @@ Détecter les vulnérabilités dans vos dépendances Python avec Safety.
    - Sauvegarde le rapport en artifact
    - Autorise l'échec du job (`allow_failure: true`)
 
-**Code attendu :**
-```yaml
-dependency-check:
-  stage: security
-  image: python:3.9
-  script:
-    - pip install safety
-    - safety check --file requirements.txt --json --output safety-report.json || true
-  artifacts:
-    paths:
-      - safety-report.json
-    expire_in: 1 week
-  allow_failure: true
-```
-
+<details>
+  <summary>Solution</summary>
+   **Code attendu :**
+   ```yaml
+   dependency-check:
+     stage: security
+     image: python:3.9
+     script:
+       - pip install safety
+       - safety check --file requirements.txt --json --output safety-report.json || true
+     artifacts:
+       paths:
+         - safety-report.json
+       expire_in: 1 week
+     allow_failure: true
+   ```
+</details>
 ---
 
 ## Partie 2 : Analyse statique du code avec Bandit (15 min)
