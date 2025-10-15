@@ -421,3 +421,7 @@ variables:
 - [GitLab API Reference](https://docs.gitlab.com/ee/api/)
 - [Pipeline Schedules](https://docs.gitlab.com/ee/ci/pipelines/schedules.html)
 - [Best practices pour les artefacts](https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html)
+
+## Solution complète
+
+https://gitlab.com/formation15/cleanup-automation
